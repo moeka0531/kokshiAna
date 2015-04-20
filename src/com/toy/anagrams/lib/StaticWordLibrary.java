@@ -30,12 +30,14 @@
 /* Anagram Game Application */
 
 package com.toy.anagrams.lib;
+import java.util.Random;
 
 /**
  * Implementation of the logic for the Anagram Game application.
  */
 final class StaticWordLibrary extends WordLibrary {
 
+	Random rand = new Random();
     private static final String[] WORD_LIST = {
     	"amazing",
         "abstraction",
@@ -84,54 +86,7 @@ final class StaticWordLibrary extends WordLibrary {
         "unsigned",
         "traditional"};
 
-    private static final String[] SCRAMBLED_WORD_LIST = {
-    	"zmagina",
-        "batsartcoin",
-        "maibuguos",
-        "ratimhteci",
-        "abkclssha",
-        "ibmtpa",
-        "iccrmutsnaec",
-        "ocbmnitaoni",
-        "ocsnqeeutnyl",
-        "ocsnroitmu",
-        "edrcmeneitgn",
-        "edepdnneyc",
-        "idasbmgiauet",
-        "ydanicm",
-        "neacsplutaoni",
-        "qeiuaveltn",
-        "xerpseisno",
-        "aficilatet",
-        "rfgaemtn",
-        "ehaxedicalm",
-        "milpmeneatitno",
-        "niidtsniugsiahleb",
-        "niehiratcen",
-        "nietnret",
-        "ajav",
-        "olacilazitno",
-        "imrcpoorecssro",
-        "anivagitno",
-        "poitimazitno",
-        "aparemert",
-        "aprtcki",
-        "ipkcel",
-        "opylomprich",
-        "irogorsuyl",
-        "isumtlnaoesuyl",
-        "psceficitaoni",
-        "tsurtcreu",
-        "elixalc",
-        "ilekiwse",
-        "amanegemtn",
-        "aminupalet",
-        "amhtmetacsi",
-        "ohjtvaa",
-        "evtrxe",
-        "nuisngde",
-        "rtdatioialn"
-    };
+    
     
     final static WordLibrary DEFAULT = new StaticWordLibrary();
 
@@ -156,7 +111,25 @@ final class StaticWordLibrary extends WordLibrary {
      * @return word at that index in its scrambled form
      */
     public String getScrambledWord(int idx) {
-        return SCRAMBLED_WORD_LIST[idx];
+    	StringBuilder sb = new StringBuilder();
+    	String[] question = new String[getWord(idx).length()];
+    	for(int i=0; i<getWord(idx).length();i++){
+    		question[i] = String.valueOf(getWord(idx).charAt(i));
+    	}
+    	int one=0;
+        int two=0;
+        while(one==two){
+        	one = rand.nextInt(getWord(idx).length());
+        	two = rand.nextInt(getWord(idx).length());
+        }
+        String tmb = question[one];
+        question[one]=question[two];
+        question[two]=tmb;
+        sb.append("");
+        for(int i=0;i<getWord(idx).length();i++){
+        	sb.insert(i, question[i]);
+        }
+        return new String(sb);
     }
 
     /**
