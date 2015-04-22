@@ -77,6 +77,7 @@ public class Anagrams extends JFrame {
 
     private int wordIdx = 0;
     private WordLibrary wordLibrary;
+    int level = 1;
 
     /** Creates new form Anagrams */
     public Anagrams() {
@@ -84,6 +85,8 @@ public class Anagrams extends JFrame {
         
         initComponents();
         getRootPane().setDefaultButton(guessButton);
+
+        wordLibrary.setSelectedLevel(level);
         scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx));
         pack();
         guessedWord.requestFocusInWindow();
@@ -218,6 +221,7 @@ public class Anagrams extends JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         mainPanel.add(selectLevel, gridBagConstraints);
+        
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
@@ -257,7 +261,10 @@ public class Anagrams extends JFrame {
         wordIdx = (wordIdx + 1) % wordLibrary.getSize();
 
         feedbackLabel.setText(" ");
-        scrambledWord.setText(wordLibrary.getScrambledWord(wordIdx));
+        int level = selectLevel.getSelectedIndex()+1;
+        wordLibrary.setSelectedLevel(level);
+        String  gWord = wordLibrary.getScrambledWord(wordIdx);
+        scrambledWord.setText(gWord);
         guessedWord.setText("");
         getRootPane().setDefaultButton(guessButton);
 
@@ -270,10 +277,10 @@ public class Anagrams extends JFrame {
 
     private void guessedWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guessedWordActionPerformed
         if (wordLibrary.isCorrect(wordIdx, guessedWord.getText())){
-            feedbackLabel.setText("Correct! Try a new word!");
+            feedbackLabel.setText("ê≥â!éüÇÃíPåÍÇ…íßêÌÇµÇƒÇ›ÇÊÇ§");
             getRootPane().setDefaultButton(nextTrial);
         } else {
-            feedbackLabel.setText("Incorrect! Try again!");
+            feedbackLabel.setText("ïsê≥â! Ç‡Ç§àÍìxíßêÌÇµÇƒÇ›ÇÊÇ§!");
             guessedWord.setText("");
         }
 

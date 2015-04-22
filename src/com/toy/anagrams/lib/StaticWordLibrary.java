@@ -89,6 +89,8 @@ final class StaticWordLibrary extends WordLibrary {
     
     
     final static WordLibrary DEFAULT = new StaticWordLibrary();
+    
+    int level;
 
     /**
      * Singleton class.
@@ -116,15 +118,18 @@ final class StaticWordLibrary extends WordLibrary {
     	for(int i=0; i<getWord(idx).length();i++){
     		question[i] = String.valueOf(getWord(idx).charAt(i));
     	}
-    	int one=0;
-        int two=0;
-        while(one==two){
-        	one = rand.nextInt(getWord(idx).length());
-        	two = rand.nextInt(getWord(idx).length());
-        }
-        String tmb = question[one];
-        question[one]=question[two];
-        question[two]=tmb;
+    	level = getSelectedLevel();
+		for(int i=0;i<level;i++){
+	    	int one=0;	
+	        int two=0;
+	        while(one==two){
+	        	one = rand.nextInt(getWord(idx).length());
+	        	two = rand.nextInt(getWord(idx).length());
+	        }
+	        String tmb = question[one];
+	        question[one]=question[two];
+	        question[two]=tmb;
+		}
         sb.append("");
         for(int i=0;i<getWord(idx).length();i++){
         	sb.insert(i, question[i]);
@@ -150,4 +155,11 @@ final class StaticWordLibrary extends WordLibrary {
         return userGuess.equals(getWord(idx));
     }
 
+    public int getSelectedLevel(){
+    	//if(level = null)
+    	return level;
+	}
+    public void setSelectedLevel(int level){
+    	this.level = level;
+    }
 }
